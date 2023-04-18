@@ -1,0 +1,6 @@
+- - - INFORMACIÓN - - - 
+
+- Este script es para extraer los ".cs" de las carpetas de los proyectos. 
+- Las carpetas de los ejercicios tiene que estar ordenados para generar correctamente las carpetas de salida.
+- El ".vscode" se ignora automaticamente
+- Los ejercicios se generan en la carpeta del Escritorio 
