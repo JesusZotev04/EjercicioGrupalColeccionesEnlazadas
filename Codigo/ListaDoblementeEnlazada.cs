@@ -73,12 +73,6 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     // public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
     // public void AñadeAlFinal(T dato)
 
-    public void Añadir(Nodo<T> nuevo) {
-        this.Primero = nuevo;
-        this.Ultimo = nuevo;
-        this.Longitud++;
-    }
-
     // BENJAMIN 
     // public void Borra(NodoListaDoblementeEnlazada<T> nodo)
 
