@@ -31,7 +31,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         Nodo<T> nuevo = new Nodo<T>(dato);
         nuevo.Anterior = nodo.Anterior;
         nuevo.Siguiente = nodo;
-        if(nodo != Primero) nodo.Anterior.Siguiente = nuevo; // El siguiente de nodo anterior es el nuevo
+        if(nodo != Primero) nodo.Anterior.Siguiente = nuevo;
         nodo.Anterior = nuevo;
 
         if(nodo == this.Primero)
@@ -44,7 +44,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
 
         nuevo.Anterior = nodo;
         nuevo.Siguiente = nodo.Siguiente;
-        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo; // El siguiente de nodo anterior es el nuevo
+        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo; // El anterior de nodo siguiente es el nuevo
         nodo.Siguiente = nuevo;
 
         if(nodo == this.Ultimo)
@@ -58,7 +58,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         Nodo<T> nuevo = new Nodo<T>(dato);
         nuevo.Anterior = nodo;
         nuevo.Siguiente = nodo.Siguiente;
-        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo; // El siguiente de nodo anterior es el nuevo
+        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo;
         nodo.Siguiente = nuevo;
 
         if(nodo == this.Ultimo)
