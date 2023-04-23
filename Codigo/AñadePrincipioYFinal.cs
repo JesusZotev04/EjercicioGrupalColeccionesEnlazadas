@@ -28,10 +28,13 @@ public void AñadeAlFinal(T dato)
         Primero = nuevo;
     }
     else
-    {
-        Ultimo!.Siguiente = nuevo;
-        nuevo.Anterior = Ultimo;
-    }
+     {
+         if(Ultimo != null)
+          {
+            Ultimo.Siguiente = nuevo;
+          }
+           nuevo.Anterior = Ultimo;
+      }
     Ultimo = nuevo;
     Longitud++;
 }
@@ -41,8 +44,13 @@ public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
     if (Longitud == 0)
     { Primero = nuevo; }
     else
-        Ultimo!.Siguiente = nuevo;
-    nuevo.Anterior = Ultimo;
+    {
+        if(Ultimo != null)
+        {
+           Ultimo.Siguiente = nuevo;
+        }
+        nuevo.Anterior = Ultimo;
+     }
 
     Ultimo = nuevo;
     Longitud++;
