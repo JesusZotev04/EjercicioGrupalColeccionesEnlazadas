@@ -12,7 +12,7 @@
         ld.AñadeAlFinal(9);
         ld.AñadeAlPrincipio(3);
         Console.WriteLine(ld);
-        NodoListaDoblementeEnlazada<int> nodo = ld.Busca(6);
+        Nodo<int> nodo = ld.Busca(6);
         ld.AñadeAntesDe(nodo, 5);
         ld.AñadeAntesDe(ld.Primero, 1);
         ld.AñadeDespuesDe(nodo, 7);
