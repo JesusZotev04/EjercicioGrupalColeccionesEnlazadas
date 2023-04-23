@@ -80,7 +80,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     // public void AñadeAlPrincipio(T dato)
     // public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
     // public void AñadeAlFinal(T dato)
-    public void AñadeAlPrincipio(NodoListaDoblementeEnlazada<T> nuevo)
+    public void AñadeAlPrincipio(Nodo<T> nuevo)
         {
             nuevo.Siguiente = Primero;
             if (Primero != null) { Primero.Anterior = nuevo; }
@@ -93,7 +93,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         }
         public void AñadeAlPrincipio(T dato)
         {
-            NodoListaDoblementeEnlazada<T> nuevo = new NodoListaDoblementeEnlazada<T>(dato);
+            Nodo<T> nuevo = new Nodo<T>(dato);
             nuevo.Siguiente = Primero;
             Primero = nuevo;
             if (Vacia) Ultimo = nuevo;
@@ -101,7 +101,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         }
         public void AñadeAlFinal(T dato)
         {
-            NodoListaDoblementeEnlazada<T> nuevo = new NodoListaDoblementeEnlazada<T>(dato);
+            Nodo<T> nuevo = new Nodo<T>(dato);
 
             if (Longitud == 0)
             {
@@ -115,7 +115,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
             Ultimo = nuevo;
             Longitud++;
         }
-        public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
+        public void AñadeAlFinal(Nodo<T> nuevo)
         {
 
             if (Vacia)
