@@ -9,6 +9,14 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         this.Primero = this.Ultimo = null;
         this.Longitud = 0;
     }
+    public ListaDoblementeEnlazada(IEnumerable<T> secuencia) {
+        this.Primero = null;
+        this.Ultimo = null;
+        this.Longitud = 0;
+
+        foreach(T dato in secuencia)
+            AñadeAlFinal(dato);
+    }
 
     // JESUS 
     public void AñadeAntesDe(Nodo<T> nodo, Nodo<T> nuevo) {
@@ -68,58 +76,17 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
 
 
     // ANTONIO 
+    // public void AñadeAlPrincipio(NodoListaDoblementeEnlazada<T> nuevo)
+    // public void AñadeAlPrincipio(T dato)
+    // public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
+    // public void AñadeAlFinal(T dato)
 
-    public void AñadeAlPrincipio(Nodo<T> nuevo)
-    {
-        nuevo.Siguiente = Primero;
-        if (Primero != null) { Primero.Anterior = nuevo; }
-
-        Primero = nuevo;
-
-        if (Longitud == 0)
-        { Ultimo = nuevo; }
-        Longitud++;
-    }
-    public void AñadeAlPrincipio(T dato)
-    {
-        Nodo<T> nuevo = new Nodo<T>(dato);
-        nuevo.Siguiente = Primero;
-        Primero = nuevo;
-        if (Longitud == 0) Ultimo = nuevo;
-        Longitud++;
-    }
-
-    public void AñadeAlFinal(T dato)
-    {
-        Nodo<T> nuevo = new Nodo<T>(dato);
-
-        if (Longitud == 0)
-        {
-            Primero = nuevo;
-        }
-        else
-        {
-            Ultimo!.Siguiente = nuevo;
-            nuevo.Anterior = Ultimo;
-        }
-        Ultimo = nuevo;
-        Longitud++;
-    }
-    public void AñadeAlFinal(Nodo<T> nuevo)
-    {
-
-        if (Longitud == 0)
-        { Primero = nuevo; }
-        else
-            Ultimo!.Siguiente = nuevo;
-        nuevo.Anterior = Ultimo;
-
-        Ultimo = nuevo;
-        Longitud++;
-    }
-    
     // BENJAMIN 
     // public void Borra(NodoListaDoblementeEnlazada<T> nodo)
+
+    // DAVID 
+    // public NodoListaDoblementeEnlazada<T> Busca(T dato)
+    // public void EditaNodo(T datoAnterior, T datoNuevo, string dirección)
 
     public IEnumerator<T> GetEnumerator() => new Enumerador(Primero);
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -136,6 +103,18 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
             actual.Dispose();
             actual = siguiente;
         }
+    }
+
+    public override string ToString() {
+        string mensaje = "";
+
+        for (Nodo<T>? i = Primero; i != null; i = i.Siguiente)
+            mensaje += $"[{i.Dato}]";
+        mensaje += " - ";
+        for (Nodo<T>? i = Ultimo; i != null; i = i.Siguiente)
+            mensaje += $"[{i.Dato}]";
+
+        return mensaje;
     }
 
     private class Enumerador : IEnumerator<T>, IDisposable {
