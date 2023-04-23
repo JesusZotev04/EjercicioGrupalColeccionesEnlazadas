@@ -80,6 +80,53 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     // public void AñadeAlPrincipio(T dato)
     // public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
     // public void AñadeAlFinal(T dato)
+    public void AñadeAlPrincipio(NodoListaDoblementeEnlazada<T> nuevo)
+        {
+            nuevo.Siguiente = Primero;
+            if (Primero != null) { Primero.Anterior = nuevo; }
+
+            Primero = nuevo;
+
+            if (Vacia)
+            { Ultimo = nuevo; }
+            Longitud++;
+        }
+        public void AñadeAlPrincipio(T dato)
+        {
+            NodoListaDoblementeEnlazada<T> nuevo = new NodoListaDoblementeEnlazada<T>(dato);
+            nuevo.Siguiente = Primero;
+            Primero = nuevo;
+            if (Vacia) Ultimo = nuevo;
+            Longitud++;
+        }
+        public void AñadeAlFinal(T dato)
+        {
+            NodoListaDoblementeEnlazada<T> nuevo = new NodoListaDoblementeEnlazada<T>(dato);
+
+            if (Longitud == 0)
+            {
+                Primero = nuevo;
+            }
+            else
+            {
+                Ultimo!.Siguiente = nuevo;
+                nuevo.Anterior = Ultimo;
+            }
+            Ultimo = nuevo;
+            Longitud++;
+        }
+        public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
+        {
+
+            if (Vacia)
+            { Primero = nuevo; }
+            else
+                Ultimo!.Siguiente = nuevo;
+            nuevo.Anterior = Ultimo;
+
+            Ultimo = nuevo;
+            Longitud++;
+        }
 
 
     // DAVID 
