@@ -21,110 +21,93 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     }
 
     // JESUS 
-    public void AñadeAntesDe(Nodo<T> nodo, Nodo<T> nuevo)
-    {
-        if (Vacia)
+    public void AñadeAntesDe(Nodo<T> nodo, Nodo<T> nuevo) {
+        if(Vacia)
             throw new ListaException("La lista no puede estar vacía");
 
         nuevo.Anterior = nodo.Anterior;
         nuevo.Siguiente = nodo;
-        if (nodo != Primero) nodo.Anterior!.Siguiente = nuevo; // El siguiente de nodo anterior es el nuevo
+        if(nodo != Primero) nodo.Anterior.Siguiente = nuevo; // El siguiente de nodo anterior es el nuevo
         nodo.Anterior = nuevo;
 
-        if (nodo == this.Primero)
+        if(nodo == this.Primero)
             this.Primero = nuevo;
         this.Longitud++;
     }
-    public void AñadeAntesDe(Nodo<T> nodo, T dato)
-    {
-        if (Vacia)
+    public void AñadeAntesDe(Nodo<T> nodo, T dato) {
+        if(Vacia)
             throw new ListaException("La lista no puede estar vacía");
 
         Nodo<T> nuevo = new Nodo<T>(dato);
         nuevo.Anterior = nodo.Anterior;
         nuevo.Siguiente = nodo;
-        if (nodo != Primero) nodo.Anterior!.Siguiente = nuevo;
+        if(nodo != Primero) nodo.Anterior.Siguiente = nuevo;
         nodo.Anterior = nuevo;
 
-        if (nodo == this.Primero)
+        if(nodo == this.Primero)
             this.Primero = nuevo;
         this.Longitud++;
     }
-    public void AñadeDespuesDe(Nodo<T> nodo, Nodo<T> nuevo)
-    {
-        if (Vacia)
+    public void AñadeDespuesDe(Nodo<T> nodo, Nodo<T> nuevo) {
+        if(Vacia)
             throw new ListaException("La lista no puede estar vacía");
 
         nuevo.Anterior = nodo;
         nuevo.Siguiente = nodo.Siguiente;
-        if (nodo != Ultimo) nodo.Siguiente!.Anterior = nuevo; // El anterior de nodo siguiente es el nuevo
+        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo; // El anterior de nodo siguiente es el nuevo
         nodo.Siguiente = nuevo;
 
-        if (nodo == this.Ultimo)
+        if(nodo == this.Ultimo)
             this.Ultimo = nuevo;
         this.Longitud++;
     }
-    public void AñadeDespuesDe(Nodo<T> nodo, T dato)
-    {
-        if (Vacia)
+    public void AñadeDespuesDe(Nodo<T> nodo, T dato) {
+        if(Vacia)
             throw new ListaException("La lista no puede estar vacía");
 
         Nodo<T> nuevo = new Nodo<T>(dato);
         nuevo.Anterior = nodo;
         nuevo.Siguiente = nodo.Siguiente;
-        if (nodo != Ultimo) nodo.Siguiente!.Anterior = nuevo;
+        if(nodo != Ultimo) nodo.Siguiente.Anterior = nuevo;
         nodo.Siguiente = nuevo;
 
-        if (nodo == this.Ultimo)
+        if(nodo == this.Ultimo)
             this.Ultimo = nuevo;
         this.Longitud++;
     }
 
+    // ANTONIO
     public void AñadeAlPrincipio(Nodo<T> nuevo)
     {
-        nuevo.Siguiente = Primero;
-        if (Primero != null) { Primero.Anterior = nuevo; }
-
-        Primero = nuevo;
-
-        if (Vacia)
-        { Ultimo = nuevo; }
+        if(Vacia) {
+            Primero = Ultimo = nuevo;
+        } else {
+            Primero.Anterior = nuevo;
+            nuevo.Siguiente = Primero;
+            Primero = nuevo;
+        }
         Longitud++;
     }
     public void AñadeAlPrincipio(T dato)
     {
         Nodo<T> nuevo = new Nodo<T>(dato);
-        nuevo.Siguiente = Primero;
-        Primero = nuevo;
-        if (Vacia) Ultimo = nuevo;
-        Longitud++;
+        AñadeAlPrincipio(nuevo);
     }
     public void AñadeAlFinal(T dato)
     {
         Nodo<T> nuevo = new Nodo<T>(dato);
 
-        if (Longitud == 0)
-        {
-            Primero = nuevo;
-        }
-        else
-        {
-            Ultimo!.Siguiente = nuevo;
-            nuevo.Anterior = Ultimo;
-        }
-        Ultimo = nuevo;
-        Longitud++;
+        AñadeAlFinal(nuevo);
     }
     public void AñadeAlFinal(Nodo<T> nuevo)
     {
-
-        if (Vacia)
-        { Primero = nuevo; }
-        else
-            Ultimo!.Siguiente = nuevo;
-        nuevo.Anterior = Ultimo;
-
-        Ultimo = nuevo;
+        if(Vacia) {
+            Primero = Ultimo = nuevo;
+        } else {
+            Ultimo.Siguiente = nuevo;
+            nuevo.Anterior = Ultimo;
+            Ultimo = nuevo;
+        }
         Longitud++;
     }
 
@@ -207,16 +190,16 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         nodo.Dispose();
         Longitud--;
     }
-    // BENJAMIN
+    
     public override string ToString()
     {
         string salida = "";
         for (Nodo<T> i = Primero; i != null; i = i.Siguiente)
             salida += $"[{i.Dato}] ";
-        salida += $"-";
+        salida += $"- ";
 
         for (Nodo<T> i = Ultimo; i != null; i = i.Anterior)
-            salida += $"[{i.Dato}]";
+            salida += $"[{i.Dato}] ";
         return salida;
     }
 
@@ -229,6 +212,7 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     {
         Nodo<T>? actual = Primero;
         Nodo<T>? siguiente;
+        this.Longitud = 0;
 
         this.Primero = this.Ultimo = null;
         while (actual != null)
