@@ -81,8 +81,6 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
     // public void AñadeAlFinal(NodoListaDoblementeEnlazada<T> nuevo)
     // public void AñadeAlFinal(T dato)
 
-    // BENJAMIN 
-    // public void Borra(NodoListaDoblementeEnlazada<T> nodo)
 
     // DAVID 
     // public NodoListaDoblementeEnlazada<T> Busca(T dato)
@@ -104,18 +102,26 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
             actual = siguiente;
         }
     }
-
-    public override string ToString() {
-        string mensaje = "";
-
-        for (Nodo<T>? i = Primero; i != null; i = i.Siguiente)
-            mensaje += $"[{i.Dato}]";
-        mensaje += " - ";
-        for (Nodo<T>? i = Ultimo; i != null; i = i.Siguiente)
-            mensaje += $"[{i.Dato}]";
-
-        return mensaje;
+    
+    // BENJAMIN
+    public void Borra(Nodo<T> nodo) {
+        nodo.Anterior.Siguiente = nodo.Siguiente;
+        nodo.Siguiente.Anterior = nodo.Anterior;
+        nodo.Dispose();
+        Longitud--;
     }
+    // BENJAMIN
+    public override string ToString() {
+        string salida = "";
+        for (Nodo<T> i = Primero; i != null; i = i.Siguiente)
+            salida += $"[{i.Dato}] ";
+        salida += $"-";
+
+        for (Nodo<T> i = Ultimo; i != null; i = i.Anterior)
+           salida += $"[{i.Dato}]";
+        return salida;
+    }
+
 
     private class Enumerador : IEnumerator<T>, IDisposable {
         private Nodo<T>? It { get; set; }
