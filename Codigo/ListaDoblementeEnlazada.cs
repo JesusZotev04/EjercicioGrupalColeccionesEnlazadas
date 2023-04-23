@@ -130,10 +130,9 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
 
 
     // DAVID 
-    // public NodoListaDoblementeEnlazada<T> Busca(T dato)
     public Nodo<T> Busca(T dato)
     {
-        Nodo<T> actual = Primero;
+        Nodo<T>? actual = Primero;
         while (actual != null)
         {
             if (actual.Dato.Equals(dato))
@@ -144,7 +143,6 @@ class ListaDoblementeEnlazada<T> : IDisposable, IEnumerable<T> where T : ICompar
         }
         return null;
     }
-    // public void EditaNodo(T datoAnterior, T datoNuevo, string dirección)
     public void EditaNodo(T datoAnterior, T datoNuevo, string direccion)
     {
         if (Primero == null)
