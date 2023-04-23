@@ -1,10 +1,22 @@
 /*
 public void Borra(Nodo<T> nodo) {
-    nodo.Anterior.Siguiente = nodo.Siguiente;
-    nodo.Siguiente.Anterior = nodo.Anterior;
-    nodo.Dispose();
-    Longitud--;
-}
+        if (Vacia) throw new ListaException("No se puede borrar un nodo de una lista vacía");
+        if (Longitud == 1) {
+            if (nodo != Primero && nodo != Ultimo) throw new ListaException("El nodo debe ser de la lista");
+            Primero = Ultimo = null;
+        } else if (nodo == Primero) {
+            Primero = nodo.Siguiente;
+            nodo.Siguiente.Anterior = null;
+        } else if (nodo == Ultimo) {
+            Ultimo = nodo.Anterior;
+            nodo.Anterior.Siguiente = null;
+        } else {
+            nodo.Anterior.Siguiente = nodo.Siguiente;
+            nodo.Siguiente.Anterior = nodo.Anterior;
+        }
+        nodo.Dispose();
+        Longitud--;
+    }
 
 public override string ToString() {
     string salida = "";
